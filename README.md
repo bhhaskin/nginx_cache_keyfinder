@@ -1,4 +1,4 @@
-# nginx_cache_keyfinder
+# Nginx Cache Keyfinder
 
 A utility for finding nginx cache files based of their cache key. 
 
