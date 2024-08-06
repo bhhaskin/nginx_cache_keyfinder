@@ -22,7 +22,7 @@ nginx_cache_keyfinder "/data/nginx/cache" "httplocalhost/about-us"
 You will need gcc, libc headers and make. On Debian/Ubuntu type (libc is included with gcc):
 
 ```bash
-    apt install gcc make
+apt install gcc make
 ```
 
 ### build
