@@ -26,11 +26,11 @@ callback(const char *fpath, const struct stat *sb, int tflag, struct FTW *ftwbuf
 
 	// not a file?
 	if (tflag != FTW_F)
-		return FTW_CONTINUE;
+		return 0;
 
 	fp = fopen(fpath, "r");
 	if (fp == NULL)
-		return FTW_CONTINUE;
+		return 0;
 
 	bytes_read = 0;
 	// find KEY marker on first run
@@ -60,7 +60,7 @@ callback(const char *fpath, const struct stat *sb, int tflag, struct FTW *ftwbuf
 
 	// enough bytes? Then look for the key prefix
 	if (bytes_read < (ssize_t)(keylen + key2len) || memcmp(buf, key, keylen) != 0)
-		return FTW_CONTINUE;
+		return 0;
 
 	// look for the key suffix if present
         if (key2len) {
@@ -72,11 +72,11 @@ callback(const char *fpath, const struct stat *sb, int tflag, struct FTW *ftwbuf
                 if (!end) {
 	                fprintf(stderr, "Invalid cache file “%s” encountered and skipped.\n", fpath);
                 	bufferr = 1;
-                	return FTW_CONTINUE;
+                	return 0;
                 }
                 ptr = end - key2len;
                 if (memcmp(ptr, key2, key2len) != 0)
-                        return FTW_CONTINUE;
+                        return 0;
         }
 
 	if (dodelete) {
@@ -85,7 +85,7 @@ callback(const char *fpath, const struct stat *sb, int tflag, struct FTW *ftwbuf
 		printf("%s\n", fpath);
 	}
 
-	return FTW_CONTINUE;
+	return 0;
 }
 
 
